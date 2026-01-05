@@ -1,0 +1,19 @@
+---
+alwaysApply: true
+---
+Use Wikimedia Codex as the single source of truth for UI decisions.
+
+Documentation:
+- Codex overview: https://doc.wikimedia.org/codex/latest/
+- Design tokens: https://doc.wikimedia.org/codex/latest/design-tokens/
+- Components: https://doc.wikimedia.org/codex/latest/components/overview.html
+- Icons: https://doc.wikimedia.org/codex/latest/icons/all-icons.html
+- Composables: https://doc.wikimedia.org/codex/latest/composables/overview.html
+
+Rules:
+- Use Codex design tokens instead of hardcoded values.
+- Use Codex components and official naming.
+- Use Codex icons instead of custom icons.
+- Follow Codex composables for interaction patterns.
+- Do NOT invent custom components unless explicitly requested.
+- If Codex does not cover a case, ask before improvising.

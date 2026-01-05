@@ -1,0 +1,12 @@
+---
+alwaysApply: true
+---
+This project is an INTERACTIVE UX PROTOTYPE.
+
+Rules:
+- This is NOT production code.
+- No backend, no real APIs unless explicitly requested.
+- Use fake data and local state to simulate behavior.
+- Interactions must be easy to trigger and observe.
+- Prefer explicit states over hidden logic.
+- Prioritize clarity for user testing over technical correctness.

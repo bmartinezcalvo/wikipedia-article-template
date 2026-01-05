@@ -1,0 +1,12 @@
+---
+alwaysApply: true
+---
+This project is a Figma-to-code prototype.
+
+Rules:
+- Recreate layouts as faithfully as possible to Figma.
+- Match spacing, alignment, proportions, and hierarchy.
+- Do NOT redesign, modernize, or improve the UI.
+- Do NOT simplify layouts unless explicitly requested.
+- Accuracy is more important than clean code.
+- If something is unclear, ASK before deciding.

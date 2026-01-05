@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+When a screenshot is provided as reference:
+
+- Treat the screenshot as the source of truth, not inspiration.
+- Do NOT infer missing elements or alternative states.
+- Do NOT adjust spacing or proportions unless clearly visible.
+- Assume desktop layout unless stated otherwise.
+- If anything is cropped or unclear, ASK before guessing.
