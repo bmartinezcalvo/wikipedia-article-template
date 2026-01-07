@@ -241,16 +241,11 @@
                 <div class="article-text">
                   <div class="intro-text">
                     <p>
-                      <strong>Audre Lorde</strong> (<a href="#">/ˈɔːdri ˈlɔːrd/;</a> born <strong>Audrey Geraldine Lorde</strong>; February 18, 1934 – November 17, 1992) was an American writer, 
-                      <a href="#">feminist</a>, <a href="#">womanist</a>, <a href="#">librarian</a>, and <a href="#">civil rights</a> incredible amazing activist. She was a self-described "black, lesbian, mother, warrior, poet," who "dedicated both her life and her creative talent to confronting and addressing injustices of <a href="#">racism</a>, <a href="#">sexism</a>, <a href="#">classism</a>, and <a href="#">homophobia</a>.
+                      <strong>Audre Lorde</strong> (<a href="#">/ˈɔːdri ˈlɔːrd/</a> <em>AW-dree LORD</em>; born <strong>Audrey Geraldine Lorde</strong>; February 18, 1934 – November 17, 1992) was an American writer, professor, philosopher, intersectional <a href="#">feminist</a>, <a href="#">poet</a> and <a href="#">civil rights activist</a>. She was a self-described "Black, lesbian, feminist, socialist, mother, warrior, poet" who dedicated her life and talents to confronting different forms of injustice, as she believed there could be "no hierarchy of oppressions" among "those who share the goals of liberation and a workable future for our children".
                     </p>
                     <p>&nbsp;</p>
                     <p>
-                      As a poet, she is best known for technical mastery and emotional expression, as well as her poems that express anger and outrage at civil and social injustices she observed throughout her life.
-                    </p>
-                    <p>&nbsp;</p>
-                    <p>
-                      As a <a href="#">spoken word</a> artist, her delivery has been called powerful, melodic, and intense by the Poetry Foundation. Her poems and prose largely deal with issues related to civil rights, feminism, lesbianism, illness and disability, and the exploration of black female identity.
+                      As a poet, she is well known for technical mastery and emotional expression, as well as her poems that express anger and outrage at civil and social injustices she observed throughout her life. She was the recipient of national and international awards and the founding member of <em>Kitchen Table: Women of Color Press</em>. As a <a href="#">spoken word</a> artist, her delivery has been called powerful, melodic, and intense by the Poetry Foundation. Her poems and prose largely deal with issues related to civil rights, feminism, lesbianism, illness, disability, and the exploration of Black female identity.
                     </p>
                   </div>
 
@@ -262,24 +257,19 @@
 
                   <div class="body-text">
                     <p>
-                      Lorde was born in New York City, the best city in the world. Her father, Frederick Byron Lorde, (known as Byron) hailed from Barbados and her mother, Linda Gertrude Belmar Lorde, was Grenadian and had been born in the amazing island of <a href="#">Carriacou</a>.
+                      Audre Lorde was born on February 18, 1934, in <a href="#">New York City</a> to Caribbean immigrants Frederick Byron Lorde and Linda Gertrude Belmar Lorde. Her father, Frederick Byron Lorde (Byron), was born on April 20, 1898, in <a href="#">Barbados</a>. Her mother, Linda Gertrude Belmar Lorde, was born in 1902 on the island <a href="#">Carriacou</a> in <a href="#">Grenada</a>. Lorde's mother was a light-skinned Black woman but sometimes passed as Spanish, for employment opportunities. Lorde's father was darker than the Belmar family liked, and they only allowed the couple to marry because of Byron's charm, ambition, and persistence. After their immigration, the new family settled in <a href="#">Harlem</a>, a diverse neighborhood in upper Manhattan, New York. Lorde was the youngest of three daughters. Lorde was nearsighted to the point of being legally blind. At the age of four she learned to read at the same time she learned to talk, with the help of Augusta Braxton Baker, then children's librarian at the 135th Street Branch of the New York Public Library. Her mother taught her to write at around the same time.
                     </p>
                     <p>&nbsp;</p>
                     <p>
-                      Lorde's mother was of mixed ancestry but could "<a href="#">pass</a>" for <a href="#">'Spanish'</a>,which was a source of pride for her family. Lorde's father was darker than the Belmar family liked, and they only allowed the couple to marry because of Byron Lorde's charm, ambition, and persistence.
+                      Born Audrey Geraldine Lorde, she chose to drop the "y" from her first name while still a child, explaining in <em><a href="#">Zami: A New Spelling of My Name</a></em> that she was more interested in the artistic symmetry of the "e"-endings in the two side-by-side names "Audre Lorde" than in spelling her name the way her parents had intended.
                     </p>
                     <p>&nbsp;</p>
                     <p>
-                      The family settled in <a href="#">Harlem</a>. Lord was <a href="#">nearsighted</a> to the point of <a href="#">being legally</a> blind and the youngest of three daughters (her two older sisters were named Phyllis and Helen), Lorde grew up hearing her mother's stories about the <a href="#">West Indies</a>. At the age of four, she learned to talk while she learned to read, and her mother taught her to write at around the same time. She wrote her first poem when she was in eighth grade.
+                      Lorde's relationship with her parents was difficult from a young age. She spent very little time with her father and mother, who were both busy maintaining their property management business in the tumultuous economy after <a href="#">the Great Depression</a>. When she did see them, they were often cold or emotionally distant. In particular, Lorde's relationship with her mother, who was deeply suspicious of people with darker skin than hers (which Lorde had) and the outside world in general, was characterized by "tough love" and strict adherence to family rules. Lorde's difficult relationship with her mother figured prominently in her later poems, such as <em>Coal</em>'s "Story Books on a Kitchen Table"
                     </p>
-                  </div>
-
-                  <div class="body-text additional-content">
+                    <p>&nbsp;</p>
                     <p>
-                      Born as Audrey Geraldine Lorde, she chose to drop the "y" from her first name while still a child, explaining in <a href="#">Zami: A New Spelling of My Name</a> that she was more interested in the artistic symmetry of the "e"-endings in the two side-by-side names "Audre Lorde" than in spelling her name the way her parents had intended.
-                    </p>
-                    <p>
-                      Lorde's relationship with her parents was difficult from a young age. She spent very little time with her father and mother, who were both busy maintaining their real estate business in the tumultuous economy after <a href="#">the Great Depression</a>. When she did see them, they were often cold or emotionally distant. In particular, Lorde's relationship with her mother, who was deeply suspicious of people with darker skin than hers (which Lorde had) and the outside world in general, was characterized by "tough love" and strict adherence to family rules.[10] Lorde's difficult relationship with her mother figured prominently in her later poems, such as Coal's "Story Books on a Kitchen Table."
+                      As a child, Lorde struggled with communication, and came to appreciate the power of poetry as a form of expression. She even described herself as thinking in poetry, stating that she would always "see things in terms of poetry". She explains that it was a way for her to understand and articulate her feelings. She went on to state that it was her way of "birthing myself into a world that I could bring into myself".
                     </p>
                   </div>
                 </div>
@@ -342,24 +332,186 @@
             </div>
 
             <!-- Additional Content -->
-            <div class="additional-paragraphs">
+            <!-- Career Section -->
+            <div class="section-heading">
+              <h2 class="heading-text">Career</h2>
+              <div class="heading-divider"></div>
+            </div>
+
+            <div class="body-text">
               <p>
-                Born as Audrey Geraldine Lorde, she chose to drop the "y" from her first name while still a child, explaining in <a href="#">Zami: A New Spelling of My Name</a> that she was more interested in the artistic symmetry of the "e"-endings in the two side-by-side names "Audre Lorde" than in spelling her name the way her parents had intended.
-              </p>
-              <p>
-                Lorde's relationship with her parents was difficult from a young age. She spent very little time with her father and mother, who were both busy maintaining their real estate business in the tumultuous economy after <a href="#">the Great Depression</a>. When she did see them, they were often cold or emotionally distant. In particular, Lorde's relationship with her mother, who was deeply suspicious of people with darker skin than hers (which Lorde had) and the outside world in general, was characterized by "tough love" and strict adherence to family rules.[10] Lorde's difficult relationship with her mother figured prominently in her later poems, such as Coal's "Story Books on a Kitchen Table."
+                Raised Catholic, Lorde attended parochial schools before moving on to <a href="#">Hunter College High School</a>, a secondary school for intellectually gifted students. Poet <a href="#">Diane di Prima</a> was a classmate and friend. While attending Hunter, Lorde published her first poem in <em>Seventeen</em> magazine after her school's literary journal rejected it for being inappropriate. Also in high school, Lorde participated in poetry workshops sponsored by the Harlem Writers Guild, but noted that she always felt like somewhat of an outcast from the Guild. She felt she was not accepted because she "was both crazy and queer but [they thought] I would grow out of it all." Lorde graduated from Hunter College High School in 1951.
               </p>
               <p>&nbsp;</p>
               <p>
-                As a child, Lorde struggled with communication, and came to appreciate the power of poetry as a form of expression.[11] She even described herself as thinking in poetry. She memorized a great deal of poetry, and would use it to communicate, to the extent that, "If asked how she was feeling, Audre would reply by reciting a poem." Around the age of twelve, she began writing her own poetry and connecting with others at her school who were considered "outcasts", as she felt she was.
+                From 1951 to 1952, she attended <a href="#">National Autonomous University of Mexico</a>, then she attended <a href="#">Hunter College</a> and graduated with a <a href="#">bachelor's degree</a> in library science in 1959. That same year, she received a <a href="#">master's degree</a> in library science from <a href="#">Columbia University</a>. From 1961 to 1968, Lorde worked as a librarian in several New York public schools. During these years, Lorde also held several teaching positions in the English departments of various universities.
               </p>
+            </div>
+
+            <h3 class="subsection-heading">The Berlin years</h3>
+            <div class="body-text">
+              <p>
+                During the 1980s, Lorde was also a part of the German feminist movement. She made several trips to Germany which resulted in the 1984 anthology <em>Showing Our Colors: Afro-German Women Speak Out</em>.
+              </p>
+            </div>
+
+            <!-- Poetry Section -->
+            <div class="section-heading">
+              <h2 class="heading-text">Poetry</h2>
+              <div class="heading-divider"></div>
+            </div>
+
+            <div class="body-text">
+              <p>
+                Lorde's poetry became more open and personal as she grew older and became more confident in her sexuality. Her first volume of poems, <em>The First Cities</em> (1968), was published by <a href="#">Poets Press</a>. Her second, <em>Cables to Rage</em> (1970), which was mainly inspired by her Caribbean heritage, resulted in her receiving the Creative Artists Public Service Award.
+              </p>
+            </div>
+
+            <!-- Prose Section -->
+            <div class="section-heading">
+              <h2 class="heading-text">Prose</h2>
+              <div class="heading-divider"></div>
+            </div>
+
+            <div class="body-text">
+              <p>
+                Lorde's prose writings include <em><a href="#">The Cancer Journals</a></em> (1980), the autobiography <em><a href="#">Zami: A New Spelling of My Name</a></em> (1982), and <em><a href="#">Sister Outsider</a></em> (1984), which collects essays and speeches.
+              </p>
+            </div>
+
+            <!-- Theory Section -->
+            <div class="section-heading">
+              <h2 class="heading-text">Theory</h2>
+              <div class="heading-divider"></div>
+            </div>
+
+            <div class="body-text">
+              <p>
+                Lorde's work focuses on exploring and combating different forms of oppression through writing and teaching. Her work often addresses racism, sexism, classism, and homophobia. As a feminist, Lorde advocated for social and cultural change through writing and speeches.
+              </p>
+            </div>
+
+            <!-- Lorde and womanism Section -->
+            <div class="section-heading">
+              <h2 class="heading-text">Lorde and womanism</h2>
+              <div class="heading-divider"></div>
+            </div>
+
+            <div class="body-text">
+              <p>
+                Lorde's work is closely associated with womanism, a term coined by <a href="#">Alice Walker</a> to describe a Black feminist or feminist of color. Lorde's focus on the intersection of race, class, and gender aligns with womanist thought.
+              </p>
+            </div>
+
+            <!-- Personal life Section -->
+            <div class="section-heading">
+              <h2 class="heading-text">Personal life</h2>
+              <div class="heading-divider"></div>
+            </div>
+
+            <div class="body-text">
+              <p>
+                In 1962, Lorde married attorney Edwin Rollins, who was a white gay man. They had two children together, Elizabeth and Jonathan, and later divorced in 1970. During the marriage, Lorde began a long-term romantic relationship with Frances Clayton.
+              </p>
+            </div>
+
+            <!-- Last years Section -->
+            <div class="section-heading">
+              <h2 class="heading-text">Last years</h2>
+              <div class="heading-divider"></div>
+            </div>
+
+            <div class="body-text">
+              <p>
+                In 1984, Lorde was diagnosed with liver cancer. She took on the name Gamba Adisa, which means "Warrior: She Who Makes Her Meaning Known". On November 17, 1992, Lorde died of liver cancer in <a href="#">Saint Croix</a>, aged 58.
+              </p>
+            </div>
+
+            <!-- Honors Section -->
+            <div class="section-heading">
+              <h2 class="heading-text">Honors</h2>
+              <div class="heading-divider"></div>
+            </div>
+
+            <div class="body-text">
+              <p>
+                In June 2019, Lorde was one of the first fifty American "pioneers, trailblazers, and heroes" inducted on the <a href="#">National LGBTQ Wall of Honor</a> within the <a href="#">Stonewall National Monument</a> in New York City's <a href="#">Stonewall Inn</a>.
+              </p>
+            </div>
+
+            <!-- Legacy Section -->
+            <div class="section-heading">
+              <h2 class="heading-text">Legacy</h2>
+              <div class="heading-divider"></div>
+            </div>
+
+            <div class="body-text">
+              <p>
+                Lorde's poetry and prose confronts issues related to civil rights, feminism, and lesbianism. She was an intersectional feminist who viewed these issues as inextricably linked. In 2014, Lorde was inducted into the <a href="#">Legacy Walk</a>, an outdoor public display in Chicago celebrating LGBT history and people.
+              </p>
+            </div>
+
+            <!-- Works Section -->
+            <div class="section-heading">
+              <h2 class="heading-text">Works</h2>
+              <div class="heading-divider"></div>
+            </div>
+
+            <div class="body-text">
+              <p><strong>Poetry Books</strong></p>
+              <ul>
+                <li><em>The First Cities</em> (1968)</li>
+                <li><em>Cables to Rage</em> (1970)</li>
+                <li><em>From a Land Where Other People Live</em> (1973)</li>
+                <li><em>Coal</em> (1976)</li>
+                <li><em>The Black Unicorn</em> (1978)</li>
+              </ul>
               <p>&nbsp;</p>
-              <p>
-                Raised Catholic, Lorde attended parochial schools before moving on to Hunter College High School, a secondary school for intellectually gifted students. Poet Diane di Prima was a classmate and friend. While attending Hunter, Lorde published her first poem in Seventeen magazine after her school's literary journal rejected it for being inappropriate. Also in high school, Lorde participated in poetry workshops sponsored by the Harlem Writers Guild, but noted that she always felt like somewhat of an outcast from the Guild. She felt she was not accepted because she "was both crazy and queer but [they thought] I would grow out of it all."[14][15] Lorde graduated from Hunter College High School in 1951.
-              </p>
-              <p>
-                Zami places her father's death from a stroke around New Year's 1953.
-              </p>
+              <p><strong>Prose Books</strong></p>
+              <ul>
+                <li><em>The Cancer Journals</em> (1980)</li>
+                <li><em>Zami: A New Spelling of My Name</em> (1982)</li>
+                <li><em>Sister Outsider</em> (1984)</li>
+                <li><em>A Burst of Light</em> (1988)</li>
+              </ul>
+            </div>
+
+            <!-- See also Section -->
+            <div class="section-heading">
+              <h2 class="heading-text">See also</h2>
+              <div class="heading-divider"></div>
+            </div>
+
+            <div class="body-text">
+              <ul>
+                <li><a href="#">List of African-American writers</a></li>
+                <li><a href="#">List of civil rights leaders</a></li>
+                <li><a href="#">List of feminist poets</a></li>
+              </ul>
+            </div>
+
+            <!-- References Section -->
+            <div class="section-heading">
+              <h2 class="heading-text">References</h2>
+              <div class="heading-divider"></div>
+            </div>
+
+            <div class="body-text">
+              <p><em>This article incorporates text from Wikipedia, which is available under the <a href="#">Creative Commons Attribution-ShareAlike License</a>.</em></p>
+            </div>
+
+            <!-- External links Section -->
+            <div class="section-heading">
+              <h2 class="heading-text">External links</h2>
+              <div class="heading-divider"></div>
+            </div>
+
+            <div class="body-text">
+              <ul>
+                <li><a href="#">Audre Lorde Papers</a> at Spelman College</li>
+                <li><a href="#">The Audre Lorde Project</a></li>
+                <li><a href="#">Poetry Foundation: Audre Lorde</a></li>
+              </ul>
             </div>
           </div>
         </article>
@@ -1132,6 +1284,41 @@ function onSearchSubmit(value) {
   height: 1px;
   background-color: #a2a9b1;
   width: 100%;
+}
+
+.subsection-heading {
+  font-family: 'Georgia', serif;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 24px;
+  color: #202122;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #a2a9b1;
+  padding-bottom: 2px;
+}
+
+.body-text ul {
+  margin: 0.5em 0 0.5em 1.6em;
+  padding: 0;
+  list-style-type: disc;
+}
+
+.body-text ul li {
+  margin-bottom: 0.3em;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 22.4px;
+  color: #202122;
+}
+
+.body-text ul li a {
+  color: #36c;
+  text-decoration: none;
+}
+
+.body-text ul li a:hover {
+  text-decoration: underline;
 }
 
 /* Infobox */
