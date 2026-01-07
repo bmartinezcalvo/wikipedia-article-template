@@ -464,14 +464,16 @@
                     </div>
                   </div>
                   
-                  <aside class="infobox-edit">
+                  <aside class="infobox">
                     <div class="infobox-title">Audre Lorde</div>
+                    
                     <div class="infobox-image-section">
                       <div class="infobox-image">
                         <img :src="audreImage" alt="Audre Lorde in 1980" />
                       </div>
                       <div class="infobox-caption">Lorde in 1980</div>
                     </div>
+
                     <div class="infobox-row">
                       <div class="infobox-label">Born</div>
                       <div class="infobox-value">
@@ -480,6 +482,7 @@
                         <a href="#">New York City</a>, U.S.
                       </div>
                     </div>
+
                     <div class="infobox-row infobox-row-faded">
                       <div class="infobox-label">Died</div>
                       <div class="infobox-value">
@@ -487,14 +490,16 @@
                         <a href="#">Saint Croix, Virgin Islands</a>, U.S.
                       </div>
                     </div>
+
                     <div class="infobox-row">
                       <div class="infobox-label">Education</div>
-                      <div class="infobox-value">
+                      <div class="infobox-value infobox-value-link">
                         <a href="#">National Autonomous University of Mexico</a><br>
                         <a href="#">Hunter College (BA)</a><br>
                         <a href="#">Columbia University (MLS)</a>
                       </div>
                     </div>
+
                     <div class="infobox-row">
                       <div class="infobox-label">Genre</div>
                       <div class="infobox-value">
@@ -502,9 +507,10 @@
                         Nonfiction
                       </div>
                     </div>
+
                     <div class="infobox-row">
                       <div class="infobox-label">Notable works</div>
-                      <div class="infobox-value">
+                      <div class="infobox-value infobox-value-link">
                         The First Cities<br>
                         <a href="#">Zami: A New Spelling of My Name</a><br>
                         <a href="#">The Cancer Journals</a>
@@ -516,6 +522,7 @@
                 <!-- Early Life Section -->
                 <div class="section-heading-edit">
                   <h2 class="heading-text-edit">Early life</h2>
+                  <div class="heading-divider"></div>
                 </div>
                 
                 <div contenteditable="true" @input="markArticleEdited" class="article-text-editable">
@@ -535,6 +542,7 @@
                 <!-- Career Section -->
                 <div class="section-heading-edit">
                   <h2 class="heading-text-edit">Career</h2>
+                  <div class="heading-divider"></div>
                 </div>
                 
                 <div contenteditable="true" @input="markArticleEdited" class="article-text-editable">
@@ -1642,7 +1650,9 @@ function markArticleEdited() {
 }
 
 .edit-mode .article {
-  max-width: none;
+  width: 100%;
+  max-width: 949px;
+  margin: 0 auto;
 }
 
 .tab {
@@ -1664,7 +1674,7 @@ function markArticleEdited() {
   height: 42px;
   border-bottom: 1px solid #c8ccd1;
   box-shadow: inset 0px -1px 0px 0px #c8ccd1, 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
-  padding: 0 16px 0 0;
+  padding: 0;
   background: #ffffff;
 }
 
@@ -1822,7 +1832,7 @@ function markArticleEdited() {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-width: 1532px;
+  max-width: 949px;
   width: 100%;
 }
 
@@ -1876,18 +1886,7 @@ function markArticleEdited() {
   margin: 0;
 }
 
-/* Infobox Edit */
-.infobox-edit {
-  flex-shrink: 0;
-  width: 272px;
-  background: #eaecf0;
-  border: 1px solid #c8ccd1;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
+/* Infobox (shared between Read and Edit modes) */
 .infobox-title {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
@@ -1959,7 +1958,7 @@ function markArticleEdited() {
     flex-direction: column;
   }
   
-  .infobox-edit {
+  .article-first-section .infobox {
     width: 100%;
   }
 }
