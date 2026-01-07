@@ -1,5 +1,5 @@
 <template>
-  <div class="read-mode">
+  <div :class="isEditMode ? 'edit-mode' : 'read-mode'">
     <!-- Page Container -->
     <div class="page-container">
       
@@ -72,8 +72,8 @@
       <!-- Main Content Area -->
       <div class="main-content-area">
         
-        <!-- Table of Contents (Left Sidebar) -->
-        <aside class="toc-sidebar">
+        <!-- Table of Contents (Left Sidebar) - Only visible in Read mode -->
+        <aside v-if="!isEditMode" class="toc-sidebar">
           <div class="toc-container">
             <div class="toc-header">
               <h2 class="toc-title">Contents</h2>
@@ -207,12 +207,13 @@
                   </div>
                   
                   <div class="tabs-end">
-                    <div class="tab tab-selected">
-                      <span class="tab-text">Read</span>
-                      <div class="tab-indicator"></div>
+                    <div class="tab" :class="{ 'tab-selected': !isEditMode }" @click="isEditMode = false">
+                      <span class="tab-text" :class="{ 'tab-link': isEditMode }">Read</span>
+                      <div v-if="!isEditMode" class="tab-indicator"></div>
                     </div>
-                    <div class="tab">
-                      <span class="tab-text tab-link">Edit</span>
+                    <div class="tab" :class="{ 'tab-selected': isEditMode }" @click="toggleEditMode">
+                      <span class="tab-text" :class="{ 'tab-link': !isEditMode }">Edit</span>
+                      <div v-if="isEditMode" class="tab-indicator"></div>
                     </div>
                     <div class="tab">
                       <span class="tab-text tab-link">View history</span>
@@ -230,11 +231,11 @@
               </div>
             </div>
 
-            <p class="article-tagline">From Wikipedia, the free encyclopedia</p>
+            <p v-if="!isEditMode" class="article-tagline">From Wikipedia, the free encyclopedia</p>
           </div>
 
           <!-- Article Content -->
-          <div class="article-content-section">
+          <div v-if="!isEditMode" class="article-content-section">
             <div class="article-ve-contents">
               <div class="article-content-grid">
                 <!-- Main Article Text -->
@@ -371,10 +372,211 @@
               </p>
             </div>
           </div>
+
+          <!-- Edit Mode Content -->
+          <div v-else class="edit-mode-content">
+            <!-- Editor Toolbar -->
+            <div class="editor-toolbar">
+              <div class="editor-toolbar-left">
+                <button class="toolbar-btn toolbar-btn-icon-only" :class="{ 'toolbar-btn-disabled': !hasUnsavedChanges }" :disabled="!hasUnsavedChanges">
+                  <cdx-icon :icon="cdxIconUndo" size="medium" />
+                </button>
+                <button class="toolbar-btn toolbar-btn-icon-only" :class="{ 'toolbar-btn-disabled': !hasUnsavedChanges }" :disabled="!hasUnsavedChanges">
+                  <cdx-icon :icon="cdxIconRedo" size="medium" />
+                </button>
+                <button class="toolbar-btn toolbar-btn-dropdown">
+                  <span class="toolbar-btn-text">Paragraph</span>
+                  <cdx-icon :icon="cdxIconExpand" size="small" class="dropdown-icon" />
+                </button>
+                <button class="toolbar-btn toolbar-btn-dropdown">
+                  <cdx-icon :icon="cdxIconTextStyle" size="medium" />
+                  <cdx-icon :icon="cdxIconExpand" size="small" class="dropdown-icon" />
+                </button>
+                <button class="toolbar-btn toolbar-btn-icon-only">
+                  <cdx-icon :icon="cdxIconLink" size="medium" />
+                </button>
+                <button class="toolbar-btn">
+                  <cdx-icon :icon="cdxIconQuotes" size="medium" />
+                  <span class="toolbar-btn-text">Cite</span>
+                </button>
+                <button class="toolbar-btn toolbar-btn-dropdown">
+                  <cdx-icon :icon="cdxIconListBullet" size="medium" />
+                  <cdx-icon :icon="cdxIconExpand" size="small" class="dropdown-icon" />
+                </button>
+                <button class="toolbar-btn toolbar-btn-dropdown">
+                  <span class="toolbar-btn-text">Insert</span>
+                  <cdx-icon :icon="cdxIconExpand" size="small" class="dropdown-icon" />
+                </button>
+                <button class="toolbar-btn toolbar-btn-icon-only">
+                  <cdx-icon :icon="cdxIconSpecialCharacter" size="medium" />
+                </button>
+              </div>
+              <div class="editor-toolbar-right">
+                <button class="toolbar-btn toolbar-btn-icon-only">
+                  <cdx-icon :icon="cdxIconHelp" size="medium" />
+                </button>
+                <button class="toolbar-btn toolbar-btn-icon-only">
+                  <cdx-icon :icon="cdxIconAlert" size="medium" />
+                </button>
+                <button class="toolbar-btn toolbar-btn-icon-only">
+                  <cdx-icon :icon="cdxIconMenu" size="medium" />
+                </button>
+                <button class="toolbar-btn toolbar-btn-dropdown">
+                  <cdx-icon :icon="cdxIconEdit" size="medium" />
+                  <cdx-icon :icon="cdxIconExpand" size="small" class="dropdown-icon" />
+                </button>
+                <button class="toolbar-btn-primary" :class="{ 'toolbar-btn-primary--disabled': !hasUnsavedChanges }" :disabled="!hasUnsavedChanges">
+                  Publish changes...
+                </button>
+              </div>
+            </div>
+
+            <!-- Tagline + Short description -->
+            <div class="edit-header">
+              <p class="tagline-edit">From Wikipedia, the free encyclopedia</p>
+              
+              <div class="short-description-section">
+                <button class="short-description-btn">
+                  <cdx-icon :icon="cdxIconPuzzle" size="medium" class="short-description-icon" />
+                  <span class="short-description-text">Short description</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Article Content Edit -->
+            <div class="article-content-edit">
+              <div class="article-main-edit">
+                <!-- First Section with Infobox -->
+                <div class="article-first-section">
+                  <div class="article-text-block">
+                    <div contenteditable="true" @input="markArticleEdited" class="article-text-editable">
+                      <p>
+                        <strong>Audre Lorde</strong> (<a href="#">/ˈɔːdri ˈlɔːrd/</a>; born <strong>Audrey Geraldine Lorde</strong>; February 18, 1934 – November 17, 1992) was an American writer, <a href="#">feminist</a>, <a href="#">womanist</a>, <a href="#">librarian</a>, and <a href="#">civil rights</a> incredible amazing activist. She was a self-described "black, lesbian, mother, warrior, poet," who "dedicated both her life and her creative talent to confronting and addressing injustices of <a href="#">racism</a>, <a href="#">sexism</a>, <a href="#">classism</a>, and <a href="#">homophobia</a>.
+                      </p>
+                      <p>&nbsp;</p>
+                      <p>
+                        As a poet, she is best known for technical mastery and emotional expression, as well as her poems that express anger and outrage at civil and social injustices she observed throughout her life.
+                      </p>
+                      <p>&nbsp;</p>
+                      <p>
+                        As a <a href="#">spoken word</a> artist, her delivery has been called powerful, melodic, and intense by the Poetry Foundation. Her poems and prose largely deal with issues related to civil rights, feminism, lesbianism, illness and disability, and the exploration of black female identity.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <aside class="infobox-edit">
+                    <div class="infobox-title">Audre Lorde</div>
+                    <div class="infobox-image-section">
+                      <div class="infobox-image">
+                        <img :src="audreImage" alt="Audre Lorde in 1980" />
+                      </div>
+                      <div class="infobox-caption">Lorde in 1980</div>
+                    </div>
+                    <div class="infobox-row">
+                      <div class="infobox-label">Born</div>
+                      <div class="infobox-value">
+                        Audrey Geraldine Lorde<br>
+                        February 18, 1934[1]<br>
+                        <a href="#">New York City</a>, U.S.
+                      </div>
+                    </div>
+                    <div class="infobox-row infobox-row-faded">
+                      <div class="infobox-label">Died</div>
+                      <div class="infobox-value">
+                        November 17, 1992 (aged 58)<br>
+                        <a href="#">Saint Croix, Virgin Islands</a>, U.S.
+                      </div>
+                    </div>
+                    <div class="infobox-row">
+                      <div class="infobox-label">Education</div>
+                      <div class="infobox-value">
+                        <a href="#">National Autonomous University of Mexico</a><br>
+                        <a href="#">Hunter College (BA)</a><br>
+                        <a href="#">Columbia University (MLS)</a>
+                      </div>
+                    </div>
+                    <div class="infobox-row">
+                      <div class="infobox-label">Genre</div>
+                      <div class="infobox-value">
+                        Poetry<br>
+                        Nonfiction
+                      </div>
+                    </div>
+                    <div class="infobox-row">
+                      <div class="infobox-label">Notable works</div>
+                      <div class="infobox-value">
+                        The First Cities<br>
+                        <a href="#">Zami: A New Spelling of My Name</a><br>
+                        <a href="#">The Cancer Journals</a>
+                      </div>
+                    </div>
+                  </aside>
+                </div>
+
+                <!-- Early Life Section -->
+                <div class="section-heading-edit">
+                  <h2 class="heading-text-edit">Early life</h2>
+                </div>
+                
+                <div contenteditable="true" @input="markArticleEdited" class="article-text-editable">
+                  <p>
+                    Lorde was born in New York City, the best city in the world. Her father, Frederick Byron Lorde, (known as Byron) hailed from Barbados and her mother, Linda Gertrude Belmar Lorde, was Grenadian and had been born in the amazing island of <a href="#">Carriacou</a>.
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>
+                    Lorde's mother was of mixed ancestry but could "<a href="#">pass</a>" for '<a href="#">Spanish</a>',which was a source of pride for her family. Lorde's father was darker than the Belmar family liked, and they only allowed the couple to marry because of Byron Lorde's charm, ambition, and persistence.
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>
+                    The family settled in <a href="#">Harlem</a>. Lord was <a href="#">nearsighted</a> to the point of <a href="#">being legally</a> blind and the youngest of three daughters (her two older sisters were named Phyllis and Helen), Lorde grew up hearing her mother's stories about the <a href="#">West Indies</a>. At the age of four, she learned to talk while she learned to read, and her mother taught her to write at around the same time. She wrote her first poem when she was in eighth grade.
+                  </p>
+                </div>
+
+                <!-- Career Section -->
+                <div class="section-heading-edit">
+                  <h2 class="heading-text-edit">Career</h2>
+                </div>
+                
+                <div contenteditable="true" @input="markArticleEdited" class="article-text-editable">
+                  <p>
+                    In 1954, she spent a pivotal year as a student at the <a href="#">National Autonomous University of Mexico</a>, a period she described as a time of affirmation and renewal. During this time, she confirmed her identity on personal and artistic levels as both a lesbian and a poet. On her return to New York, Lorde attended <a href="#">Hunter College</a>, and graduated in the class of 1959. While there, she worked as a librarian, continued writing, and became an active participant in the <a href="#">gay culture</a> of <a href="#">Greenwich Village</a>. She furthered her education at the <a href="#">Columbia University School of Library Service</a>, earning a master's degree in <a href="#">library science</a> in 1961. During this period, she worked as a public librarian in nearby <a href="#">Mount Vernon, New York</a>.
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>
+                    In 1968 Lorde was writer-in-residence at <a href="#">Tougaloo College</a> in Mississippi. Lorde's time at Tougaloo College, like her year at the <a href="#">National University of Mexico</a>, was a formative experience for her as an artist. She led workshops with her young, black undergraduate students, many of whom were eager to discuss the <a href="#">civil rights</a> issues of that time. Through these discussions with her students, she reaffirmed her desire not only to live out her "crazy and queer" identity, but also to devote attention to the formal aspects of her craft as a poet. Her book of poems, <em>Cables to Rage</em>, came out of her time and experiences at Tougaloo.
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>
+                    From 1972 to 1987, Lorde resided on <a href="#">Staten Island</a>. During that time, in addition to writing and teaching she co-founded <a href="#">Kitchen Table: Women of Color Press</a>.
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>
+                    In 1977, Lorde became an associate of the <a href="#">Women's Institute for Freedom of the Press</a> (WIFP). WIFP is an American nonprofit publishing organization. The organization works to increase communication between women and connect the public with forms of women-based media.
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>
+                    Lorde taught in the Education Department at <a href="#">Lehman College</a> from 1969 to 1970, then as a professor of English at <a href="#">John Jay College of Criminal Justice</a> (both part of the <a href="#">City University of New York</a>, CUNY) from 1970 to 1981. There, she fought for the creation of a <a href="#">black studies</a> department. In 1981, she went on to teach at her alma mater, <a href="#">Hunter College</a> (also CUNY), as the distinguished Thomas Hunter chair. As a queer Black woman, she was an outsider in a <a href="#">white male</a> dominated field and her experiences in this environment deeply influenced her work. New fields such as <a href="#">African American studies</a> and <a href="#">women's studies</a> advanced the topics that scholars were addressing and garnered attention to groups that had previously been rarely discussed. With this newfound <a href="#">academic</a> environment, Lorde was inspired to not only write poetry but also essays and articles about queer, feminist, and African American studies.
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>
+                    In 1980, together with <a href="#">Barbara Smith</a> and <a href="#">Cherríe Moraga</a>, she co-founded <a href="#">Kitchen Table: Women of Color Press</a>, the first U.S. publisher for women of color.
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>
+                    In 1981, Lorde was among the founders of the Women's Coalition of St. Croix, an organization dedicated to assisting women who have survived sexual abuse and <a href="#">intimate partner violence</a>. In the late 1980s, she also helped establish Sisterhood in Support of Sisters (SISA) in South Africa to benefit black women who were affected by <a href="#">apartheid</a> and other forms of injustice.
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>
+                    In 1985, Audre Lorde was a part of a delegation of <a href="#">black women</a> writers who had been invited to <a href="#">Cuba</a>. The trip was sponsored by <em>The Black Scholar</em> and the Union of Cuban Writers. She embraced the shared sisterhood as black women writers. They visited Cuban poets <a href="#">Nancy Morejón</a> and <a href="#">Nicolas Guillén</a>. They discussed whether the Cuban revolution had truly changed racism and the status of lesbians and gays there.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </article>
 
-        <!-- Tools Sidebar (Right) -->
-        <aside class="tools-sidebar">
+        <!-- Tools Sidebar (Right) - Only visible in Read mode -->
+        <aside v-if="!isEditMode" class="tools-sidebar">
           <div class="tools-container">
             <div class="tools-header">
               <h2 class="tools-title">Tools</h2>
@@ -421,8 +623,8 @@
 
 <script setup>
 import { ref } from 'vue';
-import { CdxTypeaheadSearch, CdxIcon } from '@wikimedia/codex';
-import { 
+import { CdxTypeaheadSearch, CdxIcon, CdxButton } from '@wikimedia/codex';
+import {
   cdxIconMenu,
   cdxIconBell,
   cdxIconTray,
@@ -432,7 +634,18 @@ import {
   cdxIconLanguage,
   cdxIconStar,
   cdxIconNext,
-  cdxIconListBullet
+  cdxIconListBullet,
+  cdxIconUndo,
+  cdxIconRedo,
+  cdxIconTextStyle,
+  cdxIconLink,
+  cdxIconQuotes,
+  cdxIconAdd,
+  cdxIconSpecialCharacter,
+  cdxIconHelp,
+  cdxIconAlert,
+  cdxIconEdit,
+  cdxIconPuzzle
 } from '@wikimedia/codex-icons';
 
 // Wikipedia logo - solo el globo
@@ -445,6 +658,10 @@ const audreImage = "https://upload.wikimedia.org/wikipedia/commons/a/a3/Audre_Lo
 const searchResults = ref([]);
 const searchFooterUrl = ref('');
 const currentSearchTerm = ref('');
+
+// Edit mode state
+const isEditMode = ref(false);
+const hasUnsavedChanges = ref(false);
 
 // Handle search input
 function onSearchInput(value) {
@@ -505,6 +722,19 @@ function onSearchResultClick(value) {
 function onSearchSubmit(value) {
   console.log('Search submitted:', value);
 }
+
+// Toggle edit mode
+function toggleEditMode() {
+  isEditMode.value = !isEditMode.value;
+  if (isEditMode.value) {
+    hasUnsavedChanges.value = false;
+  }
+}
+
+// Mark article as edited
+function markArticleEdited() {
+  hasUnsavedChanges.value = true;
+}
 </script>
 
 <style scoped>
@@ -521,6 +751,8 @@ function onSearchSubmit(value) {
   flex-direction: column;
   gap: 32px;
   padding: 12px 0;
+  max-width: 1596px;
+  margin: 0 auto;
 }
 
 /* ===== HEADER ===== */
@@ -695,6 +927,7 @@ function onSearchSubmit(value) {
   gap: 24px;
   padding: 0 32px;
   align-items: flex-start;
+  width: 100%;
 }
 
 /* ===== TABLE OF CONTENTS (LEFT SIDEBAR) ===== */
@@ -822,7 +1055,7 @@ function onSearchSubmit(value) {
 /* ===== ARTICLE (CENTER COLUMN) ===== */
 .article {
   flex: 1;
-  max-width: 910px;
+  max-width: 1067px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -1401,6 +1634,334 @@ function onSearchSubmit(value) {
 
 .tools-link:hover {
   text-decoration: underline;
+}
+
+/* ===== EDIT MODE STYLES ===== */
+.edit-mode {
+  background-color: #ffffff;
+}
+
+.edit-mode .article {
+  max-width: none;
+}
+
+.tab {
+  cursor: pointer;
+}
+
+.edit-mode-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Editor Toolbar */
+.editor-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 42px;
+  border-bottom: 1px solid #c8ccd1;
+  box-shadow: inset 0px -1px 0px 0px #c8ccd1, 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+  padding: 0 16px 0 0;
+  background: #ffffff;
+}
+
+.editor-toolbar-left,
+.editor-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 42px;
+  padding: 5px 13px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #202122;
+}
+
+.toolbar-btn:hover {
+  background-color: #f8f9fa;
+}
+
+.toolbar-btn-icon-only {
+  width: 40px;
+  padding: 5px;
+}
+
+.toolbar-btn-disabled {
+  color: #a2a9b1;
+  cursor: not-allowed;
+}
+
+.toolbar-btn-disabled:hover {
+  background-color: transparent;
+}
+
+.toolbar-btn-disabled .cdx-icon {
+  color: #a2a9b1;
+}
+
+.toolbar-btn-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #202122;
+}
+
+.toolbar-btn-dropdown {
+  padding-left: 7px;
+  padding-right: 9px;
+}
+
+.toolbar-btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  padding: 5px 13px;
+  background: #36c;
+  border: 1px solid #6485d1;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #ffffff;
+}
+
+.toolbar-btn-primary:hover {
+  background: #447ff5;
+}
+
+.toolbar-btn-primary--disabled {
+  background: #eaecf0;
+  border-color: #c8ccd1;
+  color: #a2a9b1;
+  cursor: not-allowed;
+}
+
+.toolbar-btn-primary--disabled:hover {
+  background: #eaecf0;
+}
+
+.dropdown-icon {
+  margin-left: 2px;
+}
+
+/* Edit Header */
+.edit-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0 16px 0;
+}
+
+.tagline-edit {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #72777d;
+  margin: 0;
+}
+
+.short-description-section {
+  display: flex;
+  align-items: center;
+}
+
+.short-description-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 32px;
+  padding: 4px;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.short-description-icon {
+  color: #a2a9b1;
+}
+
+.short-description-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #a2a9b1;
+}
+
+/* Article Content Edit */
+.article-content-edit {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.article-main-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 1532px;
+  width: 100%;
+}
+
+.article-first-section {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.article-text-block {
+  flex: 1;
+  min-width: 0;
+}
+
+.article-text-editable {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #202122;
+  outline: none;
+}
+
+.article-text-editable p {
+  margin: 0 0 8px 0;
+}
+
+.article-text-editable a {
+  color: #36c;
+  text-decoration: none;
+}
+
+.article-text-editable a:hover {
+  text-decoration: underline;
+}
+
+.section-heading-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 20px;
+  width: 100%;
+}
+
+.heading-text-edit {
+  font-family: 'Georgia', serif;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 27.3px;
+  color: #202122;
+  margin: 0;
+}
+
+/* Infobox Edit */
+.infobox-edit {
+  flex-shrink: 0;
+  width: 272px;
+  background: #eaecf0;
+  border: 1px solid #c8ccd1;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.infobox-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 26px;
+  color: #202122;
+  text-align: center;
+}
+
+.infobox-image-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.infobox-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.infobox-caption {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #202122;
+  text-align: center;
+  padding: 4px;
+}
+
+.infobox-row {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.infobox-row-faded {
+  opacity: 0.8;
+}
+
+.infobox-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: #202122;
+  width: 64px;
+  flex-shrink: 0;
+}
+
+.infobox-value {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: #202122;
+  flex: 1;
+}
+
+.infobox-value a {
+  color: #36c;
+  text-decoration: none;
+}
+
+.infobox-value a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1119px) {
+  .article-first-section {
+    flex-direction: column;
+  }
+  
+  .infobox-edit {
+    width: 100%;
+  }
 }
 </style>
 
