@@ -1,15 +1,25 @@
 <template>
-  <div :class="isEditMode ? 'edit-mode' : 'read-mode'">
+  <div :class="[isEditMode ? 'edit-mode' : 'read-mode', isMinervaSkin ? 'minerva-skin' : 'vector-skin']">
     <!-- Page Container -->
     <div class="page-container">
       
       <!-- Header -->
-      <header class="header-section">
-        <div class="header">
+      <header class="header-section" :class="{ 'header-section--minerva': isMinervaSkin }">
+        <div v-if="!isMinervaSkin" class="header">
           <!-- Menu Button -->
-          <button class="menu-button" aria-label="Menu">
+          <button class="menu-button" aria-label="Menu" @click="toggleSkinMenu">
             <cdx-icon :icon="cdxIconMenu" size="medium" />
           </button>
+          <div v-if="isSkinMenuOpen && !isEditMode" class="menu-popup" role="dialog" aria-label="Skin menu">
+            <label class="menu-radio">
+              <input type="radio" name="skin" value="vector22" v-model="selectedSkin" @change="isSkinMenuOpen = false">
+              <span>Vector22</span>
+            </label>
+            <label class="menu-radio">
+              <input type="radio" name="skin" value="minerva" v-model="selectedSkin" @change="isSkinMenuOpen = false">
+              <span>Minerva (mobile skin)</span>
+            </label>
+          </div>
 
           <!-- Wikipedia Logo -->
           <div class="wikipedia-logo">
@@ -64,6 +74,38 @@
             <button class="user-menu-btn" aria-label="User menu">
               <cdx-icon :icon="cdxIconUserAvatar" size="medium" />
               <cdx-icon :icon="cdxIconExpand" size="small" class="dropdown-icon" />
+            </button>
+          </div>
+        </div>
+
+        <div v-else class="header header--minerva">
+          <div class="minerva-header-left">
+            <button class="menu-button menu-button--minerva" aria-label="Menu" @click="toggleSkinMenu">
+              <cdx-icon :icon="cdxIconMenu" size="medium" />
+            </button>
+            <div v-if="isSkinMenuOpen && !isEditMode" class="menu-popup menu-popup--minerva" role="dialog" aria-label="Skin menu">
+              <label class="menu-radio">
+                <input type="radio" name="skin" value="vector22" v-model="selectedSkin" @change="isSkinMenuOpen = false">
+                <span>Vector22</span>
+              </label>
+              <label class="menu-radio">
+                <input type="radio" name="skin" value="minerva" v-model="selectedSkin" @change="isSkinMenuOpen = false">
+                <span>Minerva (mobile skin)</span>
+              </label>
+            </div>
+
+            <div class="minerva-brand">
+              <span class="minerva-brand-icon">W</span>
+              <span class="minerva-brand-text">Wikipedia</span>
+            </div>
+          </div>
+
+          <div class="minerva-header-actions">
+            <button class="icon-btn" aria-label="Search">
+              <cdx-icon :icon="cdxIconSearch" size="medium" />
+            </button>
+            <button class="icon-btn" aria-label="User menu">
+              <cdx-icon :icon="cdxIconUserAvatar" size="medium" />
             </button>
           </div>
         </div>
@@ -178,7 +220,7 @@
         <article class="article">
           <div class="article-chrome">
             <!-- Title and Toolbar -->
-            <div class="title-toolbar">
+            <div v-if="!isMinervaSkin" class="title-toolbar">
               <div class="article-title-section">
                 <div class="title-and-language">
                   <button class="toc-toggle-btn" aria-label="Toggle table of contents">
@@ -231,11 +273,44 @@
               </div>
             </div>
 
-            <p v-if="!isEditMode" class="article-tagline">From Wikipedia, the free encyclopedia</p>
+            <div v-else class="minerva-title-toolbar">
+              <div class="minerva-title-row">
+                <h1 class="minerva-article-title">Audre Lorde</h1>
+                <button class="minerva-language-button" aria-label="Language options">
+                  <cdx-icon :icon="cdxIconLanguage" size="medium" />
+                  <span>95</span>
+                </button>
+              </div>
+              <div class="minerva-tabs">
+                <button class="minerva-tab minerva-tab--active">
+                  Article
+                </button>
+                <button class="minerva-tab">
+                  Talk
+                </button>
+              </div>
+              <div class="minerva-actions">
+                <button class="minerva-action-btn" aria-label="Text style">
+                  <cdx-icon :icon="cdxIconTextStyle" size="small" />
+                </button>
+                <button class="minerva-action-btn" aria-label="Watch">
+                  <cdx-icon :icon="cdxIconStar" size="small" />
+                </button>
+                <button class="minerva-action-btn" aria-label="Edit" @click="toggleEditMode">
+                  <cdx-icon :icon="cdxIconEdit" size="small" />
+                </button>
+                <button class="minerva-action-btn" aria-label="More">
+                  <cdx-icon :icon="cdxIconMenu" size="small" />
+                </button>
+              </div>
+            </div>
+
+            <p v-if="!isEditMode && !isMinervaSkin" class="article-tagline">From Wikipedia, the free encyclopedia</p>
+            <p v-else-if="!isEditMode && isMinervaSkin" class="article-tagline article-tagline--minerva">From Wikipedia, the free encyclopedia</p>
           </div>
 
           <!-- Article Content -->
-          <div v-if="!isEditMode" class="article-content-section">
+          <div v-if="!isEditMode && !isMinervaSkin" class="article-content-section">
             <div class="article-ve-contents">
               <div class="article-content-grid">
                 <!-- Main Article Text -->
@@ -370,6 +445,154 @@
               <p>
                 In 1985, Audre Lorde was a part of a delegation of <a href="#">black women</a> writers who had been invited to <a href="#">Cuba</a>. The trip was sponsored by <em>The Black Scholar</em> and the Union of Cuban Writers. She embraced the shared sisterhood as black women writers. They visited Cuban poets <a href="#">Nancy Morejón</a> and <a href="#">Nicolas Guillén</a>. They discussed whether the Cuban revolution had truly changed racism and the status of lesbians and gays there.
               </p>
+            </div>
+          </div>
+
+          <div v-else-if="!isEditMode && isMinervaSkin" class="article-content-section minerva-article-content">
+            <div class="minerva-first-section">
+              <div class="minerva-intro">
+                <p>
+                  <strong>Audre Lorde</strong> (<a href="#">/ˈɔːdri ˈlɔːrd/</a> <em>AW-dree LORD</em>; born <strong>Audrey Geraldine Lorde</strong>; February 18, 1934 – November 17, 1992) was an American writer, professor, philosopher, intersectional <a href="#">feminist</a>, <a href="#">poet</a> and <a href="#">civil rights activist</a>. She was a self-described "Black, lesbian, feminist, socialist, mother, warrior, poet" who dedicated her life and talents to confronting different forms of injustice, as she believed there could be "no hierarchy of oppressions" among "those who share the goals of liberation and a workable future for our children".
+                </p>
+                <p>&nbsp;</p>
+                <p>
+                  As a poet, she is well known for technical mastery and emotional expression, as well as her poems that express anger and outrage at civil and social injustices she observed throughout her life. She was the recipient of national and international awards and the founding member of <em>Kitchen Table: Women of Color Press</em>. As a <a href="#">spoken word</a> artist, her delivery has been called powerful, melodic, and intense by the Poetry Foundation. Her poems and prose largely deal with issues related to civil rights, feminism, lesbianism, illness, disability, and the exploration of Black female identity.
+                </p>
+              </div>
+
+              <aside class="infobox">
+                <div class="infobox-title">Audre Lorde</div>
+                
+                <div class="infobox-image-section">
+                  <div class="infobox-image">
+                    <img :src="audreImage" alt="Audre Lorde in 1980" />
+                  </div>
+                  <div class="infobox-caption">Lorde in 1980</div>
+                </div>
+
+                <div class="infobox-row">
+                  <div class="infobox-label">Born</div>
+                  <div class="infobox-value">
+                    Audrey Geraldine Lorde<br>
+                    February 18, 1934[1]<br>
+                    <a href="#">New York City</a>, U.S.
+                  </div>
+                </div>
+
+                <div class="infobox-row infobox-row-faded">
+                  <div class="infobox-label">Died</div>
+                  <div class="infobox-value">
+                    November 17, 1992 (aged 58)<br>
+                    <a href="#">Saint Croix, Virgin Islands</a>, U.S.
+                  </div>
+                </div>
+
+                <div class="infobox-row">
+                  <div class="infobox-label">Education</div>
+                  <div class="infobox-value infobox-value-link">
+                    <a href="#">National Autonomous University of Mexico</a><br>
+                    <a href="#">Hunter College (BA)</a><br>
+                    <a href="#">Columbia University (MLS)</a>
+                  </div>
+                </div>
+
+                <div class="infobox-row">
+                  <div class="infobox-label">Genre</div>
+                  <div class="infobox-value">
+                    Poetry<br>
+                    Nonfiction
+                  </div>
+                </div>
+
+                <div class="infobox-row">
+                  <div class="infobox-label">Notable works</div>
+                  <div class="infobox-value infobox-value-link">
+                    The First Cities<br>
+                    <a href="#">Zami: A New Spelling of My Name</a><br>
+                    <a href="#">The Cancer Journals</a>
+                  </div>
+                </div>
+              </aside>
+            </div>
+
+            <div class="minerva-accordion">
+              <div class="minerva-accordion-item">
+                <div class="minerva-accordion-header">
+                  <button class="minerva-accordion-toggle" @click="toggleMinervaSection('early-life')" :aria-expanded="isMinervaSectionOpen('early-life')">
+                    <cdx-icon :icon="cdxIconExpand" size="small" :class="{'minerva-accordion-icon--open': isMinervaSectionOpen('early-life') }" />
+                    <span>Early life</span>
+                  </button>
+                  <button v-if="isMinervaSectionOpen('early-life')" class="minerva-accordion-edit" aria-label="Edit section">
+                    <cdx-icon :icon="cdxIconEdit" size="small" />
+                  </button>
+                </div>
+                <div v-if="isMinervaSectionOpen('early-life')" class="minerva-accordion-panel">
+                  <div class="body-text">
+                    <p>
+                      Audre Lorde was born on February 18, 1934, in <a href="#">New York City</a> to Caribbean immigrants Frederick Byron Lorde and Linda Gertrude Belmar Lorde. Her father, Frederick Byron Lorde (Byron), was born on April 20, 1898, in <a href="#">Barbados</a>. Her mother, Linda Gertrude Belmar Lorde, was born in 1902 on the island <a href="#">Carriacou</a> in <a href="#">Grenada</a>. Lorde's mother was a light-skinned Black woman but sometimes passed as Spanish, for employment opportunities. Lorde's father was darker than the Belmar family liked, and they only allowed the couple to marry because of Byron's charm, ambition, and persistence. After their immigration, the new family settled in <a href="#">Harlem</a>, a diverse neighborhood in upper Manhattan, New York. Lorde was the youngest of three daughters. Lorde was nearsighted to the point of being legally blind. At the age of four she learned to read at the same time she learned to talk, with the help of Augusta Braxton Baker, then children's librarian at the 135th Street Branch of the New York Public Library. Her mother taught her to write at around the same time.
+                    </p>
+                    <p>&nbsp;</p>
+                    <p>
+                      Born Audrey Geraldine Lorde, she chose to drop the "y" from her first name while still a child, explaining in <em><a href="#">Zami: A New Spelling of My Name</a></em> that she was more interested in the artistic symmetry of the "e"-endings in the two side-by-side names "Audre Lorde" than in spelling her name the way her parents had intended.
+                    </p>
+                    <p>&nbsp;</p>
+                    <p>
+                      Lorde's relationship with her parents was difficult from a young age. She spent very little time with her father and mother, who were both busy maintaining their property management business in the tumultuous economy after <a href="#">the Great Depression</a>. When she did see them, they were often cold or emotionally distant. In particular, Lorde's relationship with her mother, who was deeply suspicious of people with darker skin than hers (which Lorde had) and the outside world in general, was characterized by "tough love" and strict adherence to family rules. Lorde's difficult relationship with her mother figured prominently in her later poems, such as <em>Coal</em>'s "Story Books on a Kitchen Table"
+                    </p>
+                    <p>&nbsp;</p>
+                    <p>
+                      As a child, Lorde struggled with communication, and came to appreciate the power of poetry as a form of expression. She even described herself as thinking in poetry, stating that she would always "see things in terms of poetry". She explains that it was a way for her to understand and articulate her feelings. She went on to state that it was her way of "birthing myself into a world that I could bring into myself".
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="minerva-accordion-item">
+                <div class="minerva-accordion-header">
+                  <button class="minerva-accordion-toggle" @click="toggleMinervaSection('career')" :aria-expanded="isMinervaSectionOpen('career')">
+                    <cdx-icon :icon="cdxIconExpand" size="small" :class="{'minerva-accordion-icon--open': isMinervaSectionOpen('career') }" />
+                    <span>Career</span>
+                  </button>
+                  <button v-if="isMinervaSectionOpen('career')" class="minerva-accordion-edit" aria-label="Edit section">
+                    <cdx-icon :icon="cdxIconEdit" size="small" />
+                  </button>
+                </div>
+                <div v-if="isMinervaSectionOpen('career')" class="minerva-accordion-panel">
+                  <div class="body-text">
+                    <p>
+                      In 1954, she spent a pivotal year as a student at the <a href="#">National Autonomous University of Mexico</a>, a period she described as a time of affirmation and renewal. During this time, she confirmed her identity on personal and artistic levels as both a lesbian and a poet. On her return to New York, Lorde attended <a href="#">Hunter College</a>, and graduated in the class of 1959. While there, she worked as a librarian, continued writing, and became an active participant in the <a href="#">gay culture</a> of <a href="#">Greenwich Village</a>. She furthered her education at the <a href="#">Columbia University School of Library Service</a>, earning a master's degree in <a href="#">library science</a> in 1961. During this period, she worked as a public librarian in nearby <a href="#">Mount Vernon, New York</a>.
+                    </p>
+                    <p>&nbsp;</p>
+                    <p>
+                      In 1968 Lorde was writer-in-residence at <a href="#">Tougaloo College</a> in Mississippi. Lorde's time at Tougaloo College, like her year at the <a href="#">National University of Mexico</a>, was a formative experience for her as an artist. She led workshops with her young, black undergraduate students, many of whom were eager to discuss the <a href="#">civil rights</a> issues of that time. Through these discussions with her students, she reaffirmed her desire not only to live out her "crazy and queer" identity, but also to devote attention to the formal aspects of her craft as a poet. Her book of poems, <em>Cables to Rage</em>, came out of her time and experiences at Tougaloo.
+                    </p>
+                    <p>&nbsp;</p>
+                    <p>
+                      From 1972 to 1987, Lorde resided on <a href="#">Staten Island</a>. During that time, in addition to writing and teaching she co-founded <a href="#">Kitchen Table: Women of Color Press</a>.
+                    </p>
+                    <p>&nbsp;</p>
+                    <p>
+                      In 1977, Lorde became an associate of the <a href="#">Women's Institute for Freedom of the Press</a> (WIFP). WIFP is an American nonprofit publishing organization. The organization works to increase communication between women and connect the public with forms of women-based media.
+                    </p>
+                    <p>&nbsp;</p>
+                    <p>
+                      Lorde taught in the Education Department at <a href="#">Lehman College</a> from 1969 to 1970, then as a professor of English at <a href="#">John Jay College of Criminal Justice</a> (both part of the <a href="#">City University of New York</a>, CUNY) from 1970 to 1981. There, she fought for the creation of a <a href="#">black studies</a> department. In 1981, she went on to teach at her alma mater, <a href="#">Hunter College</a> (also CUNY), as the distinguished Thomas Hunter chair. As a queer Black woman, she was an outsider in a <a href="#">white male</a> dominated field and her experiences in this environment deeply influenced her work. New fields such as <a href="#">African American studies</a> and <a href="#">women's studies</a> advanced the topics that scholars were addressing and garnered attention to groups that had previously been rarely discussed. With this newfound <a href="#">academic</a> environment, Lorde was inspired to not only write poetry but also essays and articles about queer, feminist, and African American studies.
+                    </p>
+                    <p>&nbsp;</p>
+                    <p>
+                      In 1980, together with <a href="#">Barbara Smith</a> and <a href="#">Cherríe Moraga</a>, she co-founded <a href="#">Kitchen Table: Women of Color Press</a>, the first U.S. publisher for women of color.
+                    </p>
+                    <p>&nbsp;</p>
+                    <p>
+                      In 1981, Lorde was among the founders of the Women's Coalition of St. Croix, an organization dedicated to assisting women who have survived sexual abuse and <a href="#">intimate partner violence</a>. In the late 1980s, she also helped establish Sisterhood in Support of Sisters (SISA) in South Africa to benefit black women who were affected by <a href="#">apartheid</a> and other forms of injustice.
+                    </p>
+                    <p>&nbsp;</p>
+                    <p>
+                      In 1985, Audre Lorde was a part of a delegation of <a href="#">black women</a> writers who had been invited to <a href="#">Cuba</a>. The trip was sponsored by <em>The Black Scholar</em> and the Union of Cuban Writers. She embraced the shared sisterhood as black women writers. They visited Cuban poets <a href="#">Nancy Morejón</a> and <a href="#">Nicolas Guillén</a>. They discussed whether the Cuban revolution had truly changed racism and the status of lesbians and gays there.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -638,10 +861,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { CdxTypeaheadSearch, CdxIcon, CdxButton, CdxProgressBar } from '@wikimedia/codex';
 import {
   cdxIconMenu,
+  cdxIconSearch,
   cdxIconBell,
   cdxIconTray,
   cdxIconWatchlist,
@@ -679,6 +903,13 @@ const currentSearchTerm = ref('');
 const isEditMode = ref(false);
 const hasUnsavedChanges = ref(false);
 const isLoading = ref(false);
+const isSkinMenuOpen = ref(false);
+const selectedSkin = ref('vector22');
+const isMinervaSkin = computed(() => selectedSkin.value === 'minerva');
+const minervaOpenSections = ref({
+  'early-life': false,
+  career: false
+});
 
 // Handle search input
 function onSearchInput(value) {
@@ -745,6 +976,7 @@ function toggleEditMode() {
   if (!isEditMode.value) {
     // Activating edit mode: switch to edit mode immediately and show loading overlay
     isEditMode.value = true;
+    isSkinMenuOpen.value = false;
     isLoading.value = true;
     hasUnsavedChanges.value = false;
     
@@ -756,6 +988,21 @@ function toggleEditMode() {
     // Returning to read mode: no loading
     isEditMode.value = false;
   }
+}
+
+function toggleSkinMenu() {
+  if (isEditMode.value) {
+    return;
+  }
+  isSkinMenuOpen.value = !isSkinMenuOpen.value;
+}
+
+function toggleMinervaSection(sectionId) {
+  minervaOpenSections.value[sectionId] = !minervaOpenSections.value[sectionId];
+}
+
+function isMinervaSectionOpen(sectionId) {
+  return Boolean(minervaOpenSections.value[sectionId]);
 }
 
 // Mark article as edited
@@ -817,6 +1064,98 @@ function markArticleEdited() {
 
 .menu-button:hover {
   background-color: #f8f9fa;
+}
+
+.header-section--minerva {
+  padding: 0 16px;
+}
+
+.header--minerva {
+  background-color: #ffffff;
+  height: 56px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.minerva-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header--minerva .menu-button {
+  position: static;
+  transform: none;
+}
+
+.menu-button--minerva {
+  padding: 6px 10px;
+}
+
+.minerva-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+  color: #202122;
+}
+
+.minerva-brand-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid #a2a9b1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.minerva-brand-text {
+  font-size: 16px;
+  letter-spacing: 0.2px;
+}
+
+.minerva-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.menu-popup--minerva {
+  top: calc(100% + 6px);
+}
+
+.menu-popup {
+  position: absolute;
+  left: 0;
+  top: calc(50% + 22px);
+  background-color: #ffffff;
+  border: 1px solid #a2a9b1;
+  border-radius: 4px;
+  padding: 10px 12px;
+  display: grid;
+  gap: 8px;
+  min-width: 220px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.menu-radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #202122;
+  cursor: pointer;
+}
+
+.menu-radio input {
+  cursor: pointer;
 }
 
 /* Wikipedia Logo */
@@ -1100,6 +1439,82 @@ function markArticleEdited() {
   flex-direction: column;
 }
 
+.minerva-title-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 0 8px;
+}
+
+.minerva-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.minerva-article-title {
+  font-family: 'Source Serif Pro', serif;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 32px;
+  color: #101418;
+  margin: 0;
+}
+
+.minerva-language-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #a2a9b1;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #202122;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.minerva-tabs {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid #c8ccd1;
+  padding-bottom: 6px;
+}
+
+.minerva-tab {
+  border: none;
+  background: transparent;
+  color: #202122;
+  padding: 0 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.minerva-tab--active {
+  border-bottom-color: #202122;
+}
+
+.minerva-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 4px;
+  border-bottom: 1px solid #c8ccd1;
+  padding-bottom: 8px;
+}
+
+.minerva-action-btn {
+  border: none;
+  background: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #202122;
+}
+
 .article-title-section {
   display: flex;
   flex-direction: column;
@@ -1320,11 +1735,95 @@ function markArticleEdited() {
   margin: 0;
 }
 
+.article-tagline--minerva {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #54595d;
+  margin-top: 8px;
+}
+
 /* Article Content */
 .article-content-section {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.minerva-article-content {
+  gap: 16px;
+}
+
+.minerva-first-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.minerva-intro {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  color: #202122;
+}
+
+.minerva-intro p {
+  margin: 0;
+}
+
+.minerva-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.minerva-accordion-item {
+  border-bottom: 1px solid #c8ccd1;
+}
+
+.minerva-accordion-item:first-child {
+  border-top: 1px solid #c8ccd1;
+}
+
+.minerva-accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.minerva-accordion-toggle {
+  background: none;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  color: #202122;
+  cursor: pointer;
+  padding: 0;
+}
+
+.minerva-accordion-panel {
+  padding: 0 0 16px;
+}
+
+.minerva-accordion-icon--open {
+  transform: rotate(180deg);
+}
+
+.minerva-accordion-toggle :deep(svg) {
+  transition: transform 0.2s ease;
+}
+
+.minerva-accordion-edit {
+  border: none;
+  background: none;
+  color: #202122;
+  padding: 4px;
+  cursor: pointer;
 }
 
 .article-ve-contents {
@@ -1449,6 +1948,10 @@ function markArticleEdited() {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.minerva-skin .infobox {
+  width: 100%;
 }
 
 .infobox-title {
@@ -2006,4 +2509,3 @@ function markArticleEdited() {
   }
 }
 </style>
-
