@@ -1,5 +1,5 @@
 <template>
-  <div :class="[isEditMode ? 'edit-mode' : 'read-mode', isMinervaSkin ? 'minerva-skin' : 'vector-skin']">
+  <div ref="pageRoot" :class="[isEditMode ? 'edit-mode' : 'read-mode', isMinervaSkin ? 'minerva-skin' : 'vector-skin']">
     <!-- Page Container -->
     <div class="page-container">
       
@@ -95,7 +95,6 @@
             </div>
 
             <div class="minerva-brand">
-              <span class="minerva-brand-icon">W</span>
               <span class="minerva-brand-text">Wikipedia</span>
             </div>
           </div>
@@ -104,8 +103,8 @@
             <button class="icon-btn" aria-label="Search">
               <cdx-icon :icon="cdxIconSearch" size="medium" />
             </button>
-            <button class="icon-btn" aria-label="User menu">
-              <cdx-icon :icon="cdxIconUserAvatar" size="medium" />
+            <button class="icon-btn" aria-label="Notifications">
+              <cdx-icon :icon="cdxIconBell" size="medium" />
             </button>
           </div>
         </div>
@@ -273,7 +272,7 @@
               </div>
             </div>
 
-            <div v-else class="minerva-title-toolbar">
+            <div v-else-if="!isEditMode" class="minerva-title-toolbar">
               <div class="minerva-title-row">
                 <h1 class="minerva-article-title">Audre Lorde</h1>
                 <button class="minerva-language-button" aria-label="Language options">
@@ -290,17 +289,20 @@
                 </button>
               </div>
               <div class="minerva-actions">
-                <button class="minerva-action-btn" aria-label="Text style">
-                  <cdx-icon :icon="cdxIconTextStyle" size="small" />
+                <button class="minerva-action-btn" aria-label="Language">
+                  <cdx-icon :icon="cdxIconLanguage" size="small" />
                 </button>
                 <button class="minerva-action-btn" aria-label="Watch">
                   <cdx-icon :icon="cdxIconStar" size="small" />
                 </button>
+                <button class="minerva-action-btn" aria-label="History">
+                  <cdx-icon :icon="cdxIconHistory" size="small" />
+                </button>
                 <button class="minerva-action-btn" aria-label="Edit" @click="toggleEditMode">
                   <cdx-icon :icon="cdxIconEdit" size="small" />
                 </button>
-                <button class="minerva-action-btn" aria-label="More">
-                  <cdx-icon :icon="cdxIconMenu" size="small" />
+                <button class="minerva-action-btn" aria-label="More actions">
+                  <cdx-icon :icon="cdxIconEllipsis" size="small" />
                 </button>
               </div>
             </div>
@@ -593,15 +595,137 @@
                   </div>
                 </div>
               </div>
+
+              <div class="minerva-accordion-item">
+                <div class="minerva-accordion-header">
+                  <button class="minerva-accordion-toggle" @click="toggleMinervaSection('poetry')" :aria-expanded="isMinervaSectionOpen('poetry')">
+                    <cdx-icon :icon="cdxIconExpand" size="small" :class="{'minerva-accordion-icon--open': isMinervaSectionOpen('poetry') }" />
+                    <span>Poetry</span>
+                  </button>
+                  <button v-if="isMinervaSectionOpen('poetry')" class="minerva-accordion-edit" aria-label="Edit section">
+                    <cdx-icon :icon="cdxIconEdit" size="small" />
+                  </button>
+                </div>
+                <div v-if="isMinervaSectionOpen('poetry')" class="minerva-accordion-panel">
+                  <div class="body-text">
+                    <p>
+                      Lorde's poetry is known for its technical mastery and emotional expression, often confronting injustice and celebrating identity.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="minerva-accordion-item">
+                <div class="minerva-accordion-header">
+                  <button class="minerva-accordion-toggle" @click="toggleMinervaSection('prose')" :aria-expanded="isMinervaSectionOpen('prose')">
+                    <cdx-icon :icon="cdxIconExpand" size="small" :class="{'minerva-accordion-icon--open': isMinervaSectionOpen('prose') }" />
+                    <span>Prose</span>
+                  </button>
+                  <button v-if="isMinervaSectionOpen('prose')" class="minerva-accordion-edit" aria-label="Edit section">
+                    <cdx-icon :icon="cdxIconEdit" size="small" />
+                  </button>
+                </div>
+                <div v-if="isMinervaSectionOpen('prose')" class="minerva-accordion-panel">
+                  <div class="body-text">
+                    <p>
+                      Her essays and memoirs explore feminism, race, sexuality, and power through personal narrative and cultural critique.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <div class="minerva-last-edited">
+              <cdx-icon :icon="cdxIconClock" size="small" />
+              <div class="minerva-last-edited-text">
+                <div class="minerva-last-edited-title">Last edited 1 month ago</div>
+                <div class="minerva-last-edited-subtitle">Unreviewed</div>
+              </div>
+              <cdx-icon :icon="cdxIconNext" size="small" class="minerva-last-edited-arrow" />
+            </div>
+
+            <div class="minerva-related">
+              <div class="minerva-related-title">RELATED PAGES</div>
+              <div class="minerva-related-list">
+                <div class="minerva-related-card">
+                  <cdx-icon :icon="cdxIconArticle" size="small" />
+                  <div class="minerva-related-content">
+                    <div class="minerva-related-name">Article title (max 2 lines)</div>
+                    <div class="minerva-related-meta">Wikipedia article (more) 1 mo</div>
+                  </div>
+                </div>
+                <div class="minerva-related-card">
+                  <cdx-icon :icon="cdxIconArticle" size="small" />
+                  <div class="minerva-related-content">
+                    <div class="minerva-related-name">Article title (max 2 lines)</div>
+                    <div class="minerva-related-meta">Wikipedia article (more) 1 mo</div>
+                  </div>
+                </div>
+                <div class="minerva-related-card">
+                  <cdx-icon :icon="cdxIconArticle" size="small" />
+                  <div class="minerva-related-content">
+                    <div class="minerva-related-name">Article title (max 2 lines)</div>
+                    <div class="minerva-related-meta">Wikipedia article (more) 1 mo</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <footer class="minerva-footer">
+              <div class="minerva-footer-brand">Wikipedia</div>
+              <div class="minerva-footer-meta">
+                Content is available under <a href="#">CC BY-SA 4.0</a> unless otherwise noted.
+              </div>
+            </footer>
           </div>
 
           <!-- Edit Mode Content -->
           <div v-else class="edit-mode-content">
             <!-- Editor Toolbar -->
-            <div class="editor-toolbar">
+            <div v-if="isMinervaSkin" class="editor-toolbar editor-toolbar--minerva">
+              <button class="toolbar-btn toolbar-btn-icon-only" aria-label="Close" @click="toggleEditMode">
+                <cdx-icon :icon="cdxIconClose" size="medium" />
+              </button>
+              <button
+                class="toolbar-btn toolbar-btn-icon-only"
+                :class="{ 'toolbar-btn-disabled': !hasUnsavedChanges }"
+                :disabled="!hasUnsavedChanges"
+                aria-label="Undo"
+                @click="undoEdits"
+              >
+                <cdx-icon :icon="cdxIconUndo" size="medium" />
+              </button>
+              <button class="toolbar-btn toolbar-btn-icon-only" aria-label="Text styles">
+                <cdx-icon :icon="cdxIconTextStyle" size="medium" />
+                <cdx-icon :icon="cdxIconExpand" size="small" class="dropdown-icon" />
+              </button>
+              <button class="toolbar-btn toolbar-btn-icon-only" aria-label="Cite">
+                <cdx-icon :icon="cdxIconQuotes" size="medium" />
+              </button>
+              <button class="toolbar-btn toolbar-btn-icon-only" aria-label="Link">
+                <cdx-icon :icon="cdxIconLink" size="medium" />
+              </button>
+              <button class="toolbar-btn toolbar-btn-icon-only" aria-label="Edit options">
+                <cdx-icon :icon="cdxIconEdit" size="medium" />
+                <cdx-icon :icon="cdxIconExpand" size="small" class="dropdown-icon" />
+              </button>
+              <button
+                class="toolbar-btn toolbar-btn-icon-only toolbar-btn-primary"
+                :class="{ 'toolbar-btn-primary--disabled': !hasUnsavedChanges }"
+                :disabled="!hasUnsavedChanges"
+                aria-label="Publish"
+              >
+                <cdx-icon :icon="cdxIconNext" size="medium" />
+              </button>
+            </div>
+            <div v-else class="editor-toolbar">
               <div class="editor-toolbar-left">
-                <button class="toolbar-btn toolbar-btn-icon-only" :class="{ 'toolbar-btn-disabled': !hasUnsavedChanges }" :disabled="!hasUnsavedChanges">
+                <button
+                  class="toolbar-btn toolbar-btn-icon-only"
+                  :class="{ 'toolbar-btn-disabled': !hasUnsavedChanges }"
+                  :disabled="!hasUnsavedChanges"
+                  @click="undoEdits"
+                >
                   <cdx-icon :icon="cdxIconUndo" size="medium" />
                 </button>
                 <button class="toolbar-btn toolbar-btn-icon-only toolbar-btn-disabled" disabled>
@@ -861,12 +985,19 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, nextTick } from 'vue';
+import lordeImage from '../assets/lorde-1980.png';
 import { CdxTypeaheadSearch, CdxIcon, CdxButton, CdxProgressBar } from '@wikimedia/codex';
 import {
   cdxIconMenu,
   cdxIconSearch,
+  cdxIconShare,
+  cdxIconEllipsis,
+  cdxIconClock,
+  cdxIconHistory,
+  cdxIconArticle,
   cdxIconBell,
+  cdxIconClose,
   cdxIconTray,
   cdxIconWatchlist,
   cdxIconUserAvatar,
@@ -891,13 +1022,14 @@ import {
 // Wikipedia logo - solo el globo
 const wikipediaGlobe = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/103px-Wikipedia-logo-v2.svg.png";
 
-// Audre Lorde photo - versión thumbnail que carga más rápido
-const audreImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Audre_Lorde_in_1980.jpg/330px-Audre_Lorde_in_1980.jpg";
+// Audre Lorde photo - local asset
+const audreImage = lordeImage;
 
 // TypeaheadSearch state
 const searchResults = ref([]);
 const searchFooterUrl = ref('');
 const currentSearchTerm = ref('');
+const pageRoot = ref(null);
 
 // Edit mode state
 const isEditMode = ref(false);
@@ -908,8 +1040,11 @@ const selectedSkin = ref('vector22');
 const isMinervaSkin = computed(() => selectedSkin.value === 'minerva');
 const minervaOpenSections = ref({
   'early-life': false,
-  career: false
+  career: false,
+  poetry: false,
+  prose: false
 });
+const editSnapshot = ref([]);
 
 // Handle search input
 function onSearchInput(value) {
@@ -979,6 +1114,9 @@ function toggleEditMode() {
     isSkinMenuOpen.value = false;
     isLoading.value = true;
     hasUnsavedChanges.value = false;
+    nextTick(() => {
+      captureEditSnapshot();
+    });
     
     // Hide loading overlay after 2 seconds
     setTimeout(() => {
@@ -986,6 +1124,8 @@ function toggleEditMode() {
     }, 2000);
   } else {
     // Returning to read mode: no loading
+    restoreEditSnapshot();
+    hasUnsavedChanges.value = false;
     isEditMode.value = false;
   }
 }
@@ -1003,6 +1143,33 @@ function toggleMinervaSection(sectionId) {
 
 function isMinervaSectionOpen(sectionId) {
   return Boolean(minervaOpenSections.value[sectionId]);
+}
+
+function captureEditSnapshot() {
+  if (!pageRoot.value) {
+    return;
+  }
+  const nodes = pageRoot.value.querySelectorAll('.article-text-editable');
+  editSnapshot.value = Array.from(nodes).map((node) => ({
+    node,
+    html: node.innerHTML
+  }));
+}
+
+function restoreEditSnapshot() {
+  if (!editSnapshot.value.length) {
+    return;
+  }
+  editSnapshot.value.forEach(({ node, html }) => {
+    if (node) {
+      node.innerHTML = html;
+    }
+  });
+}
+
+function undoEdits() {
+  restoreEditSnapshot();
+  hasUnsavedChanges.value = false;
 }
 
 // Mark article as edited
@@ -1027,6 +1194,11 @@ function markArticleEdited() {
   padding: 12px 0;
   max-width: 1596px;
   margin: 0 auto;
+}
+
+.minerva-skin .page-container {
+  max-width: 994px;
+  padding-top: 0;
 }
 
 /* ===== HEADER ===== */
@@ -1068,11 +1240,17 @@ function markArticleEdited() {
 
 .header-section--minerva {
   padding: 0 16px;
+  background-color: #eaecf0;
+  border-bottom: 1px solid #c8ccd1;
+}
+
+.minerva-skin.edit-mode .header-section {
+  display: none;
 }
 
 .header--minerva {
-  background-color: #ffffff;
-  height: 56px;
+  background-color: transparent;
+  height: 48px;
   position: relative;
   display: flex;
   align-items: center;
@@ -1083,7 +1261,7 @@ function markArticleEdited() {
 .minerva-header-left {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .header--minerva .menu-button {
@@ -1092,38 +1270,31 @@ function markArticleEdited() {
 }
 
 .menu-button--minerva {
-  padding: 6px 10px;
+  padding: 4px 8px;
 }
 
 .minerva-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
   font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
-  color: #202122;
-}
-
-.minerva-brand-icon {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 1px solid #a2a9b1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
+  color: #54595d;
 }
 
 .minerva-brand-text {
-  font-size: 16px;
-  letter-spacing: 0.2px;
+  width: 120px;
+  font-size: 20px;
+  letter-spacing: 0.6px;
+  font-variant: small-caps;
 }
 
 .minerva-header-actions {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+}
+
+.header--minerva .icon-btn {
+  color: var(--color-subtle, #54595d);
 }
 
 .menu-popup--minerva {
@@ -1296,6 +1467,20 @@ function markArticleEdited() {
   width: 100%;
 }
 
+.minerva-skin .main-content-area {
+  padding: 0 16px;
+  gap: 0;
+}
+
+.minerva-skin .toc-sidebar,
+.minerva-skin .tools-sidebar {
+  display: none;
+}
+
+.minerva-skin .article {
+  max-width: 100%;
+}
+
 /* ===== TABLE OF CONTENTS (LEFT SIDEBAR) ===== */
 .toc-sidebar {
   width: 209px;
@@ -1442,8 +1627,8 @@ function markArticleEdited() {
 .minerva-title-toolbar {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 4px 0 8px;
+  gap: 6px;
+  padding: 2px 0 6px;
 }
 
 .minerva-title-row {
@@ -1451,45 +1636,39 @@ function markArticleEdited() {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #c8ccd1;
 }
 
 .minerva-article-title {
+  color: var(--color-emphasized, #202122);
   font-family: 'Source Serif Pro', serif;
-  font-weight: 500;
-  font-size: 26px;
-  line-height: 32px;
-  color: #101418;
+  font-size: var(--font-size-xxx-large, 28px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--line-height-xxx-large, 38px);
   margin: 0;
 }
 
 .minerva-language-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid #a2a9b1;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #202122;
-  padding: 4px 10px;
-  font-size: 12px;
-  cursor: pointer;
+  display: none;
 }
 
 .minerva-tabs {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
   border-bottom: 1px solid #c8ccd1;
-  padding-bottom: 6px;
+  padding-bottom: 0;
 }
 
 .minerva-tab {
   border: none;
   background: transparent;
-  color: #202122;
-  padding: 0 0 6px;
-  font-size: 13px;
-  font-weight: 600;
+  color: var(--color-subtle, #54595d);
+  padding: 0 0 5px;
+  font-size: 12px;
+  font-weight: 700;
   cursor: pointer;
   border-bottom: 2px solid transparent;
 }
@@ -1499,21 +1678,42 @@ function markArticleEdited() {
 }
 
 .minerva-actions {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
   align-items: center;
-  gap: 10px;
-  padding-top: 4px;
   border-bottom: 1px solid #c8ccd1;
-  padding-bottom: 8px;
+  justify-items: center;
+  margin-top: 0;
 }
 
 .minerva-action-btn {
   border: none;
   background: none;
-  padding: 4px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 4px;
   cursor: pointer;
-  color: #202122;
+  color: var(--color-subtle, #54595d);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
 }
+
+.minerva-actions .minerva-action-btn:first-child {
+  justify-self: start;
+}
+
+.minerva-actions .minerva-action-btn:last-child {
+  justify-self: end;
+}
+
+.minerva-action-btn:hover {
+  background-color: #eaecf0;
+}
+
 
 .article-title-section {
   display: flex;
@@ -1736,10 +1936,11 @@ function markArticleEdited() {
 }
 
 .article-tagline--minerva {
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  color: #54595d;
-  margin-top: 8px;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 12.4px;
+  line-height: 17.3px;
+  color: #101418;
+  margin: 6px 0 2px;
 }
 
 /* Article Content */
@@ -1750,24 +1951,45 @@ function markArticleEdited() {
 }
 
 .minerva-article-content {
-  gap: 16px;
+  gap: 12px;
 }
 
 .minerva-first-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .minerva-intro {
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  line-height: 22px;
+  font-size: 16px;
+  line-height: 24px;
   color: #202122;
 }
 
 .minerva-intro p {
   margin: 0;
+}
+
+.minerva-article-content .body-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  color: #202122;
+}
+
+.minerva-article-content .body-text a {
+  color: #3366cc;
+}
+
+.minerva-skin a {
+  color: var(--color-progressive, #36c);
+  text-decoration: none;
+}
+
+.minerva-skin a:hover,
+.minerva-skin a:active {
+  text-decoration: underline;
 }
 
 .minerva-accordion {
@@ -1789,7 +2011,7 @@ function markArticleEdited() {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 10px 0;
+  height: 58px;
 }
 
 .minerva-accordion-toggle {
@@ -1799,15 +2021,25 @@ function markArticleEdited() {
   align-items: center;
   gap: 8px;
   flex: 1;
-  font-size: 15px;
+  text-align: left;
+  font-size: 14px;
   font-weight: 600;
-  color: #202122;
+  color: var(--color-subtle, #54595d);
   cursor: pointer;
   padding: 0;
 }
 
+.minerva-accordion-toggle span {
+  color: var(--color-emphasized, #202122);
+  font-family: 'Source Serif Pro', serif;
+  font-size: var(--font-size-xx-large, 21px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--line-height-xx-large, 27.3px);
+}
+
 .minerva-accordion-panel {
-  padding: 0 0 16px;
+  padding: 0 0 12px;
 }
 
 .minerva-accordion-icon--open {
@@ -1821,9 +2053,115 @@ function markArticleEdited() {
 .minerva-accordion-edit {
   border: none;
   background: none;
-  color: #202122;
+  color: var(--color-subtle, #54595d);
   padding: 4px;
   cursor: pointer;
+}
+
+.minerva-last-edited {
+  margin-top: 8px;
+  background-color: #3366cc;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 0;
+  font-size: 12px;
+}
+
+.minerva-skin .minerva-last-edited :deep(.cdx-icon) {
+  color: var(--color-inverted, #ffffff);
+}
+
+.minerva-last-edited-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.minerva-last-edited-title {
+  font-weight: 600;
+}
+
+.minerva-last-edited-subtitle {
+  opacity: 0.9;
+}
+
+.minerva-last-edited-arrow {
+  margin-left: auto;
+}
+
+.minerva-related {
+  margin-top: 16px;
+}
+
+.minerva-related-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #54595d;
+  margin-bottom: 8px;
+}
+
+.minerva-related-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.minerva-related-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px;
+  border: 1px solid #c8ccd1;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.minerva-related-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.minerva-related-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #202122;
+}
+
+.minerva-related-meta {
+  font-size: 11px;
+  color: #54595d;
+}
+
+.minerva-footer {
+  margin-top: 24px;
+  padding: 16px 0 24px;
+  border-top: 1px solid #c8ccd1;
+  color: #54595d;
+}
+
+.minerva-footer-brand {
+  font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.minerva-footer-meta {
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.minerva-footer-meta a {
+  color: #3366cc;
+  text-decoration: none;
+}
+
+.minerva-footer-meta a:hover {
+  text-decoration: underline;
 }
 
 .article-ve-contents {
@@ -1887,7 +2225,7 @@ function markArticleEdited() {
 }
 
 .heading-text {
-  font-family: 'Georgia', serif;
+  font-family: 'Source Serif Pro', serif;
   font-weight: 400;
   font-size: 21px;
   line-height: 27.3px;
@@ -1903,7 +2241,7 @@ function markArticleEdited() {
 }
 
 .subsection-heading {
-  font-family: 'Georgia', serif;
+  font-family: 'Source Serif Pro', serif;
   font-weight: 600;
   font-size: 17px;
   line-height: 24px;
@@ -1951,7 +2289,62 @@ function markArticleEdited() {
 }
 
 .minerva-skin .infobox {
-  width: 100%;
+  width: 318px;
+  background-color: #f8f9fa;
+  border-color: #c8ccd1;
+  padding: 6px;
+}
+
+@media (max-width: 639px) {
+  .minerva-skin .infobox {
+    width: 100%;
+  }
+}
+
+.minerva-skin .infobox-image {
+  max-width: 318px;
+  margin: 0 auto;
+}
+
+.minerva-skin :deep(.cdx-icon) {
+  color: var(--color-subtle, #54595d);
+}
+
+.minerva-skin.edit-mode .editor-toolbar--minerva :deep(.cdx-icon) {
+  color: var(--color-base, #202122);
+}
+
+.minerva-skin.edit-mode .editor-toolbar--minerva .toolbar-btn:disabled :deep(.cdx-icon),
+.minerva-skin.edit-mode .editor-toolbar--minerva .toolbar-btn-primary:disabled :deep(.cdx-icon) {
+  color: var(--color-disabled, #a2a9b1);
+}
+
+.minerva-skin.edit-mode .editor-toolbar--minerva .toolbar-btn-primary:not(:disabled) :deep(.cdx-icon) {
+  color: var(--color-inverted, #ffffff);
+}
+
+.minerva-skin :deep(.cdx-icon svg) {
+  width: 20px;
+  height: 20px;
+}
+
+.minerva-skin .infobox-title {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.minerva-skin .infobox-caption {
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.minerva-skin .infobox-row {
+  font-size: 11px;
+  gap: 6px;
+}
+
+.minerva-skin .infobox-label {
+  width: 56px;
 }
 
 .infobox-title {
@@ -2201,6 +2594,33 @@ function markArticleEdited() {
   background: #ffffff;
 }
 
+.editor-toolbar--minerva {
+  justify-content: space-between;
+  gap: 0;
+}
+
+.editor-toolbar--minerva .toolbar-btn-primary {
+  margin-left: 0;
+  width: 44px;
+  height: 42px;
+  padding: 0;
+  border-radius: 0;
+}
+
+.minerva-skin.edit-mode .edit-mode-content {
+  padding-top: 42px;
+}
+
+.minerva-skin.edit-mode .editor-toolbar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  width: 100%;
+  max-width: 994px;
+}
+
 .editor-toolbar-left,
 .editor-toolbar-right {
   display: flex;
@@ -2356,7 +2776,11 @@ function markArticleEdited() {
 }
 
 .short-description-icon {
-  color: #a2a9b1;
+  color: var(--color-disabled, #a2a9b1);
+}
+
+.minerva-skin.edit-mode .short-description-icon {
+  color: var(--color-disabled, #a2a9b1);
 }
 
 .short-description-text {
@@ -2400,6 +2824,11 @@ function markArticleEdited() {
   line-height: 22px;
   color: #202122;
   outline: none;
+}
+
+.minerva-skin .article-text-editable {
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .article-text-editable p {
