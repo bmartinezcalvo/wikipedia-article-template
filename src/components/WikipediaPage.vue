@@ -1050,7 +1050,7 @@ onMounted(() => {
   if (typeof window === 'undefined') {
     return;
   }
-  const isMobile = window.matchMedia('(max-width: 767px)').matches;
+  const isMobile = window.matchMedia('(max-width: 640px)').matches;
   selectedSkin.value = isMobile ? 'minerva' : 'vector22';
 });
 
