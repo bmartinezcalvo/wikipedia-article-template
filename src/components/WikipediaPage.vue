@@ -985,7 +985,7 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick } from 'vue';
+import { ref, computed, nextTick, onMounted } from 'vue';
 import lordeImage from '../assets/lorde-1980.png';
 import { CdxTypeaheadSearch, CdxIcon, CdxButton, CdxProgressBar } from '@wikimedia/codex';
 import {
@@ -1045,6 +1045,14 @@ const minervaOpenSections = ref({
   prose: false
 });
 const editSnapshot = ref([]);
+
+onMounted(() => {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  const isMobile = window.matchMedia('(max-width: 767px)').matches;
+  selectedSkin.value = isMobile ? 'minerva' : 'vector22';
+});
 
 // Handle search input
 function onSearchInput(value) {
@@ -2339,12 +2347,12 @@ function markArticleEdited() {
 }
 
 .minerva-skin .infobox-row {
-  font-size: 11px;
+  font-size: 14px;
   gap: 6px;
 }
 
 .minerva-skin .infobox-label {
-  width: 56px;
+  min-width: 80px;
 }
 
 .infobox-title {
