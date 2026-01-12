@@ -10,13 +10,17 @@ This template replicates the Wikipedia article experience with both **Read** and
 
 ### Read Mode
 - Article layout with text content and infobox
-- Table of Contents sidebar on the left and Tools panel on the right
+- Table of Contents sidebar on the left and Tools panel on the right (Vector22)
+- Minerva (mobile skin) layout with accordion sections and related content
+- Skin switcher in the header (Vector22 / Minerva)
 - Responsive behavior (sidebar panels collapse at breakpoint-tablet from 1119px screens)
 - Wikipedia header with search functionality
 
 ### Edit Mode
-- Editor toolbar with options
-- Editable article content with automatic change detection
+- Editor toolbar with options (desktop)
+- Minerva edit toolbar (mobile-optimized)
+- Loading overlay with ProgressBar on mode switch
+- Editable article content with automatic change detection and undo
 
 ## Tech Stack
 
@@ -37,7 +41,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:5174](http://localhost:5174) in your browser.
+Open the local dev URL shown in the terminal.
 
 ## Project Structure
 
@@ -45,6 +49,8 @@ Open [http://localhost:5174](http://localhost:5174) in your browser.
 src/
 ├── components/
 │   └── WikipediaPage.vue    # Main article component
+├── assets/
+│   └── lorde-1980.png        # Local infobox image
 ├── App.vue                   # App wrapper
 └── style.css                 # Global styles
 ```
@@ -56,6 +62,10 @@ Edit article content directly in `WikipediaPage.vue`:
 - Text sections (intro, Early life, Career)
 - Infobox data
 - Images (update `audreImage` constant)
+  
+### Skins
+- Vector22 is the default skin
+- Minerva (mobile) is selectable via the header menu
 
 ### Design Tokens
 This project uses Codex design tokens. Reference:
@@ -98,4 +108,3 @@ This template is for internal UX prototyping and testing.
 ---
 
 **Note**: This is an interactive prototype, not production code. It uses fake data and simplified interactions for UX testing purposes.
-
