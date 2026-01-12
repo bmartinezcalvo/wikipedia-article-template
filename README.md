@@ -9,18 +9,17 @@ This template replicates the Wikipedia article experience with both **Read** and
 ## Features
 
 ### Read Mode
+- Wikipedia header with search functionality
 - Article layout with text content and infobox
 - Table of Contents sidebar on the left and Tools panel on the right (Vector22)
 - Minerva (mobile skin) layout with accordion sections and related content
 - Skin switcher in the header (Vector22 / Minerva)
 - Responsive behavior (sidebar panels collapse at breakpoint-tablet from 1119px screens)
-- Wikipedia header with search functionality
 
 ### Edit Mode
-- Editor toolbar with options (desktop)
-- Minerva edit toolbar (mobile-optimized)
 - Loading overlay with ProgressBar on mode switch
-- Editable article content with automatic change detection and undo
+- Editor toolbar with options
+- Editable article content with automatic change detection
 
 ## Tech Stack
 
@@ -67,39 +66,19 @@ Edit article content directly in `WikipediaPage.vue`:
 - Vector22 is the default skin
 - Minerva (mobile) is selectable via the header menu
 
-### Design Tokens
-This project uses Codex design tokens. Reference:
+### Codex Design System
+This project uses the Codex Wikimedia design system. Reference:
 - [Codex Design Tokens](https://doc.wikimedia.org/codex/latest/design-tokens/)
 - [Codex Components](https://doc.wikimedia.org/codex/latest/components/overview.html)
 - [Codex Icons](https://doc.wikimedia.org/codex/latest/icons/all-icons.html)
-
-### Layout Widths
-- Page container: 1596px max
-- Article (Read mode): 1067px max
-- Article (Edit mode): 1532px max
-- TOC sidebar: 209px
-- Tools sidebar: 208px
-
-## Design Principles
-
-✅ **Fidelity to design** - Match Figma designs exactly  
-✅ **Explicit state** - Easy to trigger and observe interactions  
-✅ **Fake data** - No backend, uses local state  
-❌ **Not production code** - Prioritizes clarity over optimization  
-❌ **No abstractions** - Simple, explicit code  
 
 ## Contributing
 
 This is a UX prototype template. When making changes:
 1. Keep design fidelity as the top priority
 2. Use Codex components and tokens
-3. Test on different screen sizes (especially 1119px breakpoint)
+3. Test on different screen sizes
 4. Avoid over-engineering - this is for user testing
-
-## Responsive Behavior
-
-- **≤ 1119px (tablet)**: TOC and Tools panels collapse, toggle buttons appear
-- **≤ 768px (mobile)**: Further layout adjustments
 
 ## License
 
